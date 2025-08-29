@@ -1,0 +1,13 @@
+defaults:
+  engine: socket
+  ports: "1-1024"
+  timeout: 1.0
+  workers: 400
+  rate: 1000
+  retries: 0
+  resolve_hosts: true
+  output_format: table
+  report_format: html
+
+scanme_targets:
+  - scanme.nmap.org
