@@ -30,3 +30,24 @@ def run_scan(args, settings: Dict[str, Any]):
     targets = resolve_targets(raw_targets) if (not args.no_resolve and defaults.get('resolve_hosts', True)) else raw_targets
 
 
+    if not targets:
+        raise SystemExit("No valid targets resolved.")
+
+    ports = parse_ports(port_spec)
+    if not ports:
+        raise SystemExit("No valid ports to scan.")
+
+
+    # Choose engine
+    if engine == 'socket':
+        scanner = SocketScanner(timeout=timeout, retries=retries, workers=workers)
+    elif engine == 'scapy':
+        scanner = ScapyScanner(timeout=timeout, retries=retries, rate=rate, mode=args.mode)
+    elif engine == 'nmap':
+        scanner = NmapScanner(timeout=timeout, retries=retries)
+    else:
+        raise SystemExit(f"Unknown engine: {engine}")
+
+
+    log.info("Running %s scan on %d target(s), %d port(s)", engine, len(targets), len(ports))
+    results = scanner.scan(targets, ports)
