@@ -51,3 +51,25 @@ def run_scan(args, settings: Dict[str, Any]):
 
     log.info("Running %s scan on %d target(s), %d port(s)", engine, len(targets), len(ports))
     results = scanner.scan(targets, ports)
+
+
+    # Console output
+    outfmt = (args.output or defaults.get('output_format', 'table')).lower()
+    if outfmt == 'json':
+        print(as_json(results))
+    elif outfmt == 'csv':
+        print(as_csv(results))
+    else:
+        print(as_table(results))
+
+    # Report output
+    if args.save:
+        repfmt = args.report or defaults.get('report_format', 'html')
+        if repfmt == 'none':
+            repfmt = 'html'
+        path = save_report(results, engine, targets, ports, repfmt, args.save)
+        if path:
+            log.info("Report saved: %s", path)
+
+    return results
+
