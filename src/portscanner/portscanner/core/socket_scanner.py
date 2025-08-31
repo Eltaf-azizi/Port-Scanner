@@ -36,3 +36,21 @@ class SocketScanner(ScannerBase):
         return port, {"state": "closed", "meta": {}}
 
 
+def scan(self, targets: Iterable[str], ports: Iterable[int]) -> Dict[str, Any]:
+        results: Dict[str, Any] = {}
+        # For each host we create tasks so we can process host-by-host and avoid flooding memory
+        
+        for host in targets:
+            results.setdefault(host, {})
+            futures: List = []
+
+            with ThreadPoolExecutor(max_workers=self.workers) as pool:
+                for p in ports:
+                    futures.append(pool.submit(self._check_port, host, p))
+
+                for f in as_completed(futures):
+                    port, info = f.result()
+                    results[host][port] = info
+                    
+        return results
+
