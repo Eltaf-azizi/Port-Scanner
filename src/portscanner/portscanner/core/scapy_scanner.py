@@ -23,3 +23,24 @@ class ScapyScanner(ScannerBase):
                     ans = sr1(pkt, timeout=self.timeout, retry=self.retries)
                     if ans is None:
                         state = "filtered"
+                    else:
+                        if self.mode == "udp":
+                            # If ICMP Port Unreachable present -> closed else open|filtered
+                            if ans.haslayer("ICMP"):
+                                state = "closed"
+                            else:
+                                state = "open|filtered"
+                        else:
+                            tcp = ans.getlayer("TCP")
+                            if tcp is not None and tcp.flags & 0x12:  # SYN-ACK
+                                state = "open"
+                            elif tcp is not None and tcp.flags & 0x14:  # RST
+                                state = "closed"
+                            else:
+                                state = "filtered"
+                    results[host][port] = {"state": state, "meta": {"engine": f"scapy-{self.mode}"}}
+                except PermissionError:
+                    results[host][port] = {"state": "error", "meta": {"error": "Permission denied (run as root/admin)", "engine": f"scapy-{self.mode}"}}
+                except Exception as e:
+                    results[host][port] = {"state": "error", "meta": {"error": str(e), "engine": f"scapy-{self.mode}"}}
+        return results
