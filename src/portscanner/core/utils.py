@@ -33,4 +33,28 @@ def expand_targets(target: str) -> Iterable[str]:
     try:
         if '/' in target:
             net = ipaddress.ip_network(target, strict=False)
+            for ip in net.hosts():
+                yield str(ip)
+        else:
+            # Validate DNS resolution
+            try:
+                socket.gethostbyname(target)
+                yield target
+            except socket.gaierror:
+                return
+    except ValueError:
+        return
+
+
+
+def resolve_targets(raw_targets: Iterable[str]) -> List[str]:
+    seen: Set[str] = set()
+    final: List[str] = []
+    for t in raw_targets:
+        for ip in expand_targets(t):
+            if ip not in seen:
+                seen.add(ip)
+                final.append(ip)
+    return final
+ 
  
