@@ -44,3 +44,27 @@ HTML_TEMPLATE = Template(
 </body>
 </html>"""
 )
+
+def save_report(results: Dict[str, Any], engine: str, targets, ports, fmt: str, path: str) -> Optional[str]:
+    fmt = (fmt or "").lower()
+    if fmt == "json":
+      data = as_json(results)
+      open(path, "w", encoding="utf-8").write(data)
+      return path
+    
+    elif fmt == "scv":
+       data = as_csv(results)
+       open(path, "w", encoding="utf-8").write(data)
+       return path
+    
+    elif fmt == "html":
+       html = HTML_TEMPLATE.render(
+          engine = engine,
+          targets = list(targets),
+          ports=[str(p) for p in ports],
+          results = results,
+          raw_json = as_json(results)
+       )
+       open(path, "w", encoding='utf-8').write(html)
+       return path
+    return None
