@@ -17,3 +17,27 @@ This project is designed for learning network basics, penetration testing workfl
    - HTML
    - Text
  - Clean project structure with logging, utils, and reporting
+
+
+## Project Structure
+
+       port-scanner/
+       ├── README.md
+       ├── requirements.txt
+       ├── src/
+       │   ├── main.py             # CLI entry point
+       │   ├── scanner.py          # Core scanning logic
+       │   ├── engines/            # Engines (socket, nmap, scapy)
+       │   │   ├── socket_engine.py
+       │   │   ├── nmap_engine.py
+       │   │   └── scapy_engine.py
+       │   ├── reporting/          # Reporting formats
+       │   │   ├── json_report.py
+       │   │   ├── html_report.py
+       │   │   └── text_report.py
+       │   ├── utils/
+       │   │   ├── logger.py
+       │   │   └── validators.py
+       │   └── config.py           # Config constants
+       └── tests/                  # Unit tests
+
