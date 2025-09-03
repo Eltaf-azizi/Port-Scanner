@@ -85,3 +85,16 @@ python src/main.py scan --target 192.168.1.1 --ports 1-1000 --workers 500
 ```
 python src/main.py scan --target scanme.nmap.org --ports 1-200 --report html --save output.html
 ```
+
+## 📊 Example Output
+
+Terminal (text report):
+```
+[+] Scanning target: scanme.nmap.org
+Open ports found:
+ - 22/tcp (OpenSSH 6.6.1)
+ - 80/tcp (Apache httpd 2.4.7)
+```
+
+**HTML Report (output.html)**:
+Interactive table with host, port, and service information.
