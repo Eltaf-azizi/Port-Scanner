@@ -41,3 +41,27 @@ This project is designed for learning network basics, penetration testing workfl
        │   └── config.py           # Config constants
        └── tests/                  # Unit tests
 
+
+## 🚀 Installation
+
+1. Clone the repo:
+```
+git clone https://github.com/yourusername/port-scanner.git
+cd port-scanner
+```
+
+2. Create a virtual environment and install dependencies:
+```
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+3. (Optional) Install Nmap:
+
+ - Linux: sudo apt install nmap
+
+ - Mac: brew install nmap
+
+ - Windows: Download Nmap
+
