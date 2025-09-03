@@ -75,3 +75,13 @@ python src/main.py scan --target scanme.nmap.org --ports 1-100
 ```
 python src/main.py scan --target 192.168.1.1 --ports 20-80 --engine nmap
 ```
+
+### Parallel Workers
+```
+python src/main.py scan --target 192.168.1.1 --ports 1-1000 --workers 500
+```
+
+### Save Report
+```
+python src/main.py scan --target scanme.nmap.org --ports 1-200 --report html --save output.html
+```
