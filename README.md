@@ -121,4 +121,12 @@ pytest tests/
   - Build lightweight GUI with Tkinter/React
   - Dockerize project for easy deployment
 
+## 🙌 Contributing
+
+ - Contributions are welcome!
+ - Fork the project
+ - Create a new branch (`feature/awesome-feature`)
+ - Commit your changes
+ - Open a Pull Request
+<h3 align="center">Happy Coding!</h3>
 
