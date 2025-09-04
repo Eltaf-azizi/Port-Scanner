@@ -106,4 +106,11 @@ Run unit tests:
 pytest tests/
 ```
 
+## 📚 Learning Goals
+
+ - Understand TCP/IP basics and port scanning
+ - Learn how to use Python for network security tools
+ - Explore `socket`, `scapy`, and `nmap` in practice
+ - Build scalable CLI apps with reporting
+
 
