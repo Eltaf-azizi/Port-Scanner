@@ -98,3 +98,12 @@ Open ports found:
 
 **HTML Report (output.html)**:
 Interactive table with host, port, and service information.
+
+## 🧪 Testing
+
+Run unit tests:
+```
+pytest tests/
+```
+
+
