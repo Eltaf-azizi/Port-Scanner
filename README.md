@@ -114,3 +114,11 @@ pytest tests/
  - Build scalable CLI apps with reporting
 
 
+## 📌 Roadmap
+
+  - Add UDP scanning support
+  - Add service version detection
+  - Build lightweight GUI with Tkinter/React
+  - Dockerize project for easy deployment
+
+
